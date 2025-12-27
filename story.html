@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Story</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== BASE ===== */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #14002a, #3a0066, #6a1b9a, #c77dff);
+    background-size: 400% 400%;
+    animation: gradientMove 15s ease infinite;
+    color: #fff;
+    overflow-x: hidden;
+    position: relative;
+  }
+
+  @keyframes gradientMove {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  /* ===== CONTAINER ===== */
+  .container {
+    background: rgba(255,255,255,0.05);
+    backdrop-filter: blur(20px);
+    padding: 40px 30px;
+    border-radius: 25px;
+    max-width: 750px;
+    margin: 80px auto 0 auto;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(200,140,255,0.4);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: all 0.8s ease;
+    position: relative;
+  }
+
+  .container.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  h1 {
+    font-size: clamp(32px, 5vw, 45px);
+    margin-bottom: 25px;
+    background: linear-gradient(90deg, #e0b3ff, #fff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(220,170,255,0.6);
+  }
+
+  p {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 30px;
+    color: #f4e6ff;
+    text-align: justify;
+  }
+
+  a {
+    display: inline-block;
+    text-decoration: none;
+    padding: 12px 25px;
+    background: linear-gradient(90deg, #c77dff, #a855f7);
+    color: #fff;
+    border-radius: 25px;
+    font-weight: 600;
+    transition: 0.3s;
+    box-shadow: 0 5px 15px rgba(200,140,255,0.5);
+  }
+
+  a:hover {
+    background: linear-gradient(90deg, #a855f7, #7e22ce);
+    box-shadow: 0 5px 20px rgba(216,165,255,0.7);
+  }
+
+  /* ===== HAMBURGER ===== */
+  .hamburger {
+    position: fixed;
+    top: 25px;
+    left: 25px;
+    width: 30px;
+    height: 22px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    z-index: 1001;
+  }
+
+  .hamburger div {
+    height: 4px;
+    background: #fff;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+  }
+
+  /* ===== SIDE NAV ===== */
+  .side-nav {
+    position: fixed;
+    top: 0;
+    left: -250px;
+    width: 250px;
+    height: 100%;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 0 40px rgba(180,110,255,0.4);
+    transition: 0.4s ease;
+    z-index: 1000;
+  }
+
+  .side-nav.open {
+    left: 0;
+  }
+
+  .side-nav a {
+    text-decoration: none;
+    color: #f4dfff;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 20px;
+    transition: 0.3s ease;
+  }
+
+  .side-nav a:hover {
+    background: linear-gradient(90deg,#c77dff,#a855f7);
+    box-shadow: 0 0 20px rgba(200,140,255,0.9);
+  }
+
+  .close-btn {
+    align-self: flex-end;
+    font-size: 2rem;
+    cursor: pointer;
+    color: #fff;
+    position: absolute;
+    top: 15px;
+    right: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .container {
+      padding: 30px 20px;
+      margin-top: 100px;
+    }
+
+    p {
+      font-size: 16px;
+    }
+
+    a {
+      padding: 10px 20px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- HAMBURGER -->
+<div class="hamburger" id="hamburger">
+  <div></div>
+  <div></div>
+  <div></div>
+</div>
+
+<!-- SIDE NAV -->
+<nav class="side-nav" id="sideNav">
+  <span class="close-btn" id="closeNav">&times;</span>
+  <a href="ABOUT.html">About Us</a>
+  <a href="CONTACT.html">Contact Us</a>
+  <a href="HOME2.html">Dashboard</a>
+</nav>
+
+<!-- CONTENT -->
+<div class="container" id="storyCard">
+  <h1>Our Story</h1>
+  <p>
+    Our journey as BSIS E2025 began on the first day of classes, <strong>August 11, 2025</strong>. 
+    At the start, we were a group of students cautiously stepping into a new chapter of our lives. 
+    The first days were filled with shy introductions, tentative smiles, and the excitement of meeting new blockmates. 
+    Slowly, we began to form our own circle of friends within the block section. Some revealed their intelligence, others their humor, 
+    creating a lively vibe that made our days unforgettable.  
+
+    As time passed, our bonds grew stronger. We discovered each other’s strengths, shared laughter during study sessions, 
+    and supported one another in both academics and personal growth. Even our professors, initially intimidating figures, 
+    became memorable parts of our journey as we built positive relationships and learned under their guidance.  
+
+    Together, we celebrated small victories, overcame challenges, and created countless memories that will last a lifetime. 
+    Our story is a testament to friendship, teamwork, and the joy of learning in a supportive and fun environment. 
+    Every day added new experiences, and our block section blossomed into a thriving, united community. 
+    This website captures the spirit, energy, and unforgettable moments of BSIS E2025, reflecting how far we’ve come and all that we’ve accomplished together.
+  </p>
+  <a href="HOME2.html">↩ Back to Home</a>
+</div>
+
+<script>
+  // Animate container
+  window.addEventListener('DOMContentLoaded', () => {
+    const storyCard = document.getElementById('storyCard');
+    setTimeout(() => {
+      storyCard.classList.add('show');
+    }, 200);
+  });
+
+  // Hamburger functionality
+  const hamburger = document.getElementById('hamburger');
+  const sideNav = document.getElementById('sideNav');
+  const closeNav = document.getElementById('closeNav');
+
+  hamburger.addEventListener('click', () => {
+    sideNav.classList.add('open');
+  });
+
+  closeNav.addEventListener('click', () => {
+    sideNav.classList.remove('open');
+  });
+
+  document.addEventListener('click', (e) => {
+    if(!sideNav.contains(e.target) && !hamburger.contains(e.target)){
+      sideNav.classList.remove('open');
+    }
+  });
+</script>
+
+</body>
+</html>

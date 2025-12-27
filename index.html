@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Introduction</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #cdb4ff, #6a4fb3, #1f133f);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+}
+
+/* Wrapper */
+.wrapper {
+  width: 88%;
+  min-height: 92vh;
+  border-radius: 40px;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(25px);
+  box-shadow: 0 40px 80px rgba(0,0,0,0.35);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  overflow: hidden;
+}
+
+/* Left Section */
+.left {
+  padding: 60px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.left h1 {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.1;
+  background: linear-gradient(90deg,#fff,#e6c9ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.left p {
+  margin-top: 20px;
+  font-size: 1.1rem;
+  opacity: 0.85;
+  max-width: 480px;
+}
+.highlight {
+  color: #ffd6ff;
+  font-weight: 600;
+}
+
+/* Glowing Proceed Button */
+.proceedBtn {
+  margin-top: 40px;
+  padding: 18px 40px;
+  border-radius: 50px;
+  background: linear-gradient(135deg,#c77dff,#9d4edd);
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+  width: fit-content;
+  box-shadow: 0 0 10px #9d4edd, 0 0 20px #c77dff, 0 0 30px #9d4edd;
+  animation: glow 2s ease-in-out infinite alternate, float 4s ease-in-out infinite;
+  transition: 0.4s ease;
+}
+.proceedBtn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 20px #9d4edd, 0 0 40px #c77dff, 0 0 60px #9d4edd;
+}
+
+/* Glow Animation */
+@keyframes glow {
+  0% { box-shadow: 0 0 10px #9d4edd, 0 0 20px #c77dff, 0 0 30px #9d4edd; }
+  100% { box-shadow: 0 0 20px #9d4edd, 0 0 40px #c77dff, 0 0 60px #9d4edd; }
+}
+
+/* Right Section */
+.right {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* Photo Cards */
+.card {
+  position: relative;
+  height: 220px;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,255,255,0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: 0.4s;
+  overflow: hidden;
+  flex-direction: column;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+}
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 25px;
+}
+.placeholder {
+  text-align: center;
+  opacity: 0.85;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.placeholder h3 {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+.placeholder p {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+.delete {
+  position: absolute;
+  top: 12px;
+  right: 15px;
+  background: rgba(0,0,0,0.6);
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+.card.has-img .delete {
+  display: flex;
+}
+
+/* Popup Image */
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+.popup img {
+  width: 400px;
+  height: 500px;
+  border-radius: 25px;
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+}
+
+/* Animations */
+@keyframes float {
+  0%,100%{transform:translateY(0);}
+  50%{transform:translateY(-5px);}
+}
+
+@media(max-width:768px){
+  .wrapper{grid-template-columns:1fr; height:auto;}
+  .left,.right{padding:30px;}
+  .left h1{font-size:2.2rem;}
+}
+</style>
+</head>
+<body>
+
+<div class="wrapper">
+  <div class="left">
+    <h1>BSIS 1E<br>Class of 2025</h1>
+    <p>Welcome to our digital space — a place where <span class="highlight">learning, creativity, and memories</span> come together.</p>
+    <p>This platform serves as our LMS hub, archive, and home. Explore our journey and grow with us.</p>
+    <a href="HOME2.html" class="cta proceedBtn">Enter to our Domain Expansion! ✦</a>
+  </div>
+  <div class="right">
+    <div class="card">
+      <div class="placeholder">
+        <h3>＋ Add Photo</h3>
+        <p>Class memory</p>
+      </div>
+      <span class="delete">×</span>
+    </div>
+    <div class="card">
+      <div class="placeholder">
+        <h3>＋ Add Photo</h3>
+        <p>Moments together</p>
+      </div>
+      <span class="delete">×</span>
+    </div>
+  </div>
+</div>
+
+<input type="file" id="fileInput" hidden accept="image/*">
+<div class="popup" id="popup"><img id="popupImg"></div>
+
+<script>
+/* Photo Gallery with persistent storage */
+const cards = document.querySelectorAll('.card');
+const fileInput = document.getElementById('fileInput');
+const popup = document.getElementById('popup');
+const popupImg = document.getElementById('popupImg');
+let activeCard = null;
+
+// Load saved images from localStorage
+cards.forEach((card, index) => {
+  const savedImg = localStorage.getItem(`cardImg${index}`);
+  if (savedImg) {
+    card.innerHTML = `<img src="${savedImg}"><span class="delete">×</span>`;
+    card.classList.add('has-img');
+  }
+});
+
+cards.forEach((card, index) => {
+  card.onclick = e => {
+    if (e.target.classList.contains('delete')) {
+      card.innerHTML = `<div class="placeholder"><h3>＋ Add Photo</h3><p>Upload memory</p></div><span class="delete">×</span>`;
+      card.classList.remove('has-img');
+      localStorage.removeItem(`cardImg${index}`);
+      return;
+    }
+    if (card.classList.contains('has-img')) {
+      popup.style.display = 'flex';
+      popupImg.src = card.querySelector('img').src;
+    } else {
+      activeCard = card;
+      activeCard.index = index; // store index
+      fileInput.click();
+    }
+  };
+});
+
+fileInput.onchange = e => {
+  const file = e.target.files[0];
+  if (!file || !activeCard) return;
+
+  const reader = new FileReader();
+  reader.onload = () => {
+    activeCard.innerHTML = `<img src="${reader.result}"><span class="delete">×</span>`;
+    activeCard.classList.add('has-img');
+    localStorage.setItem(`cardImg${activeCard.index}`, reader.result);
+  };
+  reader.readAsDataURL(file);
+};
+
+popup.onclick = () => popup.style.display = 'none';
+
+</script>
+</body>
+</html>

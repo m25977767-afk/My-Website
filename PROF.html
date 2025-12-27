@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professors List</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a001f, #3a0a3d, #8b1e3f, #c77dff);
+  background-size: 400% 400%;
+  animation: gradientMove 14s ease infinite;
+  color: #fff;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== TOP NAV ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 30px;
+  background: rgba(20, 0, 40, 0.7);
+  backdrop-filter: blur(18px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(140, 80, 255, 0.4);
+}
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: #f4dfff;
+  margin-left: 70px;
+}
+.navbar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.nav-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #e9d8ff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+.nav-links a:hover {
+  background: linear-gradient(90deg, #a855f7, #7e22ce);
+  box-shadow: 0 0 15px rgba(168,85,247,0.8);
+  color: #fff;
+}
+.nav-links a.active {
+  background: linear-gradient(90deg, #c77dff, #a855f7);
+  box-shadow: 0 0 18px rgba(200,140,255,0.9);
+  color: #fff;
+}
+
+/* ===== HAMBURGER MENU ===== */
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger div {
+  width: 28px;
+  height: 3px;
+  background: #fff;
+  border-radius: 3px;
+  transition: 0.3s ease;
+}
+
+/* ===== SIDE NAV ===== */
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100%;
+  width: 250px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 0 40px rgba(180, 110, 255, 0.4);
+  transition: 0.4s ease;
+  z-index: 1000;
+}
+.side-nav a {
+  text-decoration: none;
+  color: #f4dfff;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+.side-nav a:hover {
+  background: linear-gradient(90deg, #c77dff, #a855f7);
+  box-shadow: 0 0 20px rgba(200, 140, 255, 0.9);
+}
+.close-btn {
+  align-self: flex-end;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #fff;
+}
+.side-nav.open { left: 0; }
+
+/* ===== DASHBOARD ===== */
+.dashboard {
+  max-width: 1300px;
+  margin: 80px auto;
+  padding: 70px 25px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  box-shadow: 0 0 40px rgba(180, 110, 255, 0.4);
+  text-align: center;
+flex: 1;
+}
+.dashboard h1 {
+  font-size: clamp(32px, 5vw, 45px);
+  background: linear-gradient(90deg, #e0b3ff, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 25px rgba(220, 170, 255, 0.8);
+  margin-bottom: 40px;
+}
+
+/* ===== NAVBAR ANIMATION ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 30px;
+  background: rgba(20, 0, 40, 0.7);
+  backdrop-filter: blur(18px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(140, 80, 255, 0.4);
+  animation: navbarGlow 3s ease-in-out infinite;
+}
+
+/* Glow pulse effect */
+@keyframes navbarGlow {
+  0%, 100% { box-shadow: 0 10px 30px rgba(140, 80, 255, 0.4); }
+  50% { box-shadow: 0 10px 40px rgba(200, 120, 255, 0.7); }
+}
+
+/* Brand slide-in */
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: #f4dfff;
+  margin-left: 70px;
+  animation: brandSlide 1s ease forwards;
+}
+@keyframes brandSlide {
+  0% { transform: translateX(-100px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Links fade-in */
+.nav-links a {
+  text-decoration: none;
+  color: #e9d8ff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+  font-weight: 500;
+  opacity: 0;
+  animation: linkFadeIn 1s forwards;
+}
+.nav-links a:nth-child(1) { animation-delay: 0.3s; }
+.nav-links a:nth-child(2) { animation-delay: 0.45s; }
+.nav-links a:nth-child(3) { animation-delay: 0.6s; }
+.nav-links a:nth-child(4) { animation-delay: 0.75s; }
+.nav-links a:nth-child(5) { animation-delay: 0.9s; }
+.nav-links a:nth-child(6) { animation-delay: 1.05s; }
+.nav-links a:nth-child(7) { animation-delay: 1.2s; }
+.nav-links a:nth-child(8) { animation-delay: 1.35s; }
+.nav-links a:nth-child(9) { animation-delay: 1.5s; }
+.nav-links a:nth-child(10) { animation-delay: 1.65s; }
+.nav-links a:nth-child(11) { animation-delay: 1.8s; }
+
+@keyframes linkFadeIn {
+  0% { opacity: 0; transform: translateY(-15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+/* ===== INPUT & SELECT ===== */
+.add-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
+  margin-bottom: 30px;
+}
+.add-select, .add-input {
+  padding: 12px 15px;
+  border-radius: 20px;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+.add-select {
+  background: linear-gradient(135deg,#fff,#f9ecff);
+  font-weight: 600;
+  box-shadow: 0 0 15px rgba(255,255,255,0.2);
+}
+.add-input {
+  width: 280px;
+  background: #fff;
+  color: #33004d;
+}
+.add-btn {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(90deg,#c77dff,#e0b3ff);
+  color: #fff;
+  font-size: 1.6rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.add-btn:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px rgba(220,180,255,0.7);
+}
+
+/* ===== PROFESSORS LIST ===== */
+ul {
+  list-style: none;
+  padding: 0;
+}
+li {
+  background: rgba(255,255,255,0.1);
+  border-radius: 20px;
+  padding: 15px 20px;
+  margin: 12px 0;
+  box-shadow: 0 0 20px rgba(180,110,255,0.3);
+  position: relative;
+  text-align: left;
+  transition: 0.3s ease;
+}
+li:hover { transform: translateY(-4px) scale(1.02); }
+.delete-btn {
+  position: absolute;
+  top:10px;
+  right:10px;
+  border:none;
+  background: linear-gradient(90deg,#ff4d6d,#ff758f);
+  color:#fff;
+  border-radius:50%;
+  width:28px; height:28px;
+  cursor:pointer;
+}
+
+/* ===== SPARKLE ===== */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  pointer-events: none;
+  opacity: 0.8;
+  box-shadow: 0 0 8px 3px rgba(255,255,255,0.8);
+  animation: sparkleAnim 0.8s ease-out forwards;
+}
+@keyframes sparkleAnim {
+  0% { transform: scale(0.5); opacity:1; }
+  100% { transform: scale(1.5); opacity:0; }
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align:center;
+  padding:20px;
+  background: rgba(30,0,60,0.8);
+  box-shadow:0 -5px 15px rgba(200,140,255,0.5);
+  border-radius:20px;
+  margin-top:40px;
+}
+</style>
+</head>
+<body>
+
+<!-- Hamburger -->
+<div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+
+<!-- Side Nav -->
+<nav class="side-nav" id="sideNav">
+  <span class="close-btn" id="closeNav">&times;</span>
+  <a href="about.html">About Us</a>
+  <a href="story.html">Our Story</a>
+  <a href="contact.html">Contact Us</a>
+</nav>
+
+<!-- Top Nav -->
+<div class="navbar">
+  <div class="brand">
+    <img src="C:\Users\Jenell\Downloads\rrrrrr.jpg" alt="BSIS"> BSIS E
+  </div>
+  <div class="nav-links">
+    <a href="HOME2.html">Home</a>
+    <a href="OFFICERS.html">Officers</a>
+    <a href="MASTERLIST.html">Masterlist</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="BDAY.html">Birthdays</a>
+    <a href="EVENTS.html">Events</a>
+    <a href="TODO.html">To-Do</a>
+    <a href="FEEDBACKS.html">Comments</a>
+    <a href="SCHED.html">Schedule</a>
+    <a href="PROF.html">Professors</a>
+    <a href="MEMORIES.html">Moments</a>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<section class="dashboard">
+  <h1> Professor's Name & Subject 🧑‍🏫</h1>
+<h2> Select a subject and type your professor's name ✅ </h2>
+<br>
+  <div class="add-container">
+    <select class="add-select">
+      <option value="">Select Subject📚</option>
+<option value="CC 103">💻Computer Programming 2 (Adv Java)</option>
+<option value="CC 104">📊Data Structures and Algorithm</option>
+<option value="CC 105">👩🏻‍💻Information Management (DB/SQL)</option>
+<option value="IS 103">⚙️IT Infrastructure and Network Technologies</option>
+<option value="GE 1">🥸Understanding the Self</option>
+<option value="GE 2">📑Readings in Philippine History</option>
+<option value="GE 10">📚Pagbasa at Pagsulat sa Iba't Ibang Disiplina</option>
+<option value="PE 2">🏃🏻‍➡️Physical Education 2</option>
+<option value="NSTP 2">👷🏻‍♂️CWTS/ROTC/LTS</option>
+
+
+    </select>
+    <input type="text" class="add-input" placeholder="Enter Professor Name" />
+    <button class="add-btn">+</button>
+  </div>
+
+  <ul id="profList"></ul>
+</section>
+
+<footer>© 2025 Bachelor of Science in Information System | Designed by Group 2</footer>
+
+<script>
+// Hamburger
+const hamburger = document.getElementById("hamburger");
+const sideNav = document.getElementById("sideNav");
+const closeNav = document.getElementById("closeNav");
+hamburger.addEventListener("click",()=>sideNav.classList.add("open"));
+closeNav.addEventListener("click",()=>sideNav.classList.remove("open"));
+document.addEventListener("click",(e)=>{if(!sideNav.contains(e.target)&&!hamburger.contains(e.target)) sideNav.classList.remove("open");});
+
+// Sparkle
+document.addEventListener('mousemove', e=>{
+  const sparkle = document.createElement('div');
+  sparkle.className='sparkle';
+  sparkle.style.left=e.pageX+'px';
+  sparkle.style.top=e.pageY+'px';
+  document.body.appendChild(sparkle);
+  setTimeout(()=>sparkle.remove(),800);
+});
+
+// Professors list
+const addBtn = document.querySelector('.add-btn');
+const addInput = document.querySelector('.add-input');
+const addSelect = document.querySelector('.add-select');
+const profList = document.getElementById('profList');
+
+function attachDelete(li){
+  const del=document.createElement('button');
+  del.textContent='×';
+  del.className='delete-btn';
+  del.onclick=()=>{ li.remove(); saveProfs(); };
+  li.appendChild(del);
+}
+
+function saveProfs(){
+  const profs=[];
+  document.querySelectorAll('#profList li').forEach(li=>{
+    profs.push(li.textContent.slice(0,-1));
+  });
+  localStorage.setItem('profs',JSON.stringify(profs));
+}
+
+function loadProfs(){
+  const profs=JSON.parse(localStorage.getItem('profs')||'[]');
+  profs.forEach(p=>{
+    const li=document.createElement('li');
+    li.textContent=p;
+    attachDelete(li);
+    profList.appendChild(li);
+  });
+}
+loadProfs();
+
+addBtn.addEventListener('click', ()=>{
+  const text=addInput.value.trim();
+  const subject=addSelect.value;
+  if(!text||!subject) return alert('Please select subject and enter professor!');
+  const li=document.createElement('li');
+  li.textContent=`${subject}: ${text}`;
+  attachDelete(li);
+  profList.appendChild(li);
+  addInput.value='';
+  addSelect.value='';
+  saveProfs();
+});
+
+addInput.addEventListener('keypress',e=>{if(e.key==='Enter') addBtn.click();});
+
+const navLinks = document.querySelectorAll(".nav-links a");
+const currentPage = window.location.pathname.split("/").pop();
+
+navLinks.forEach(link => {
+  const linkPage = link.getAttribute("href");
+  if (linkPage === currentPage) {
+    link.classList.add("active");
+  }
+});
+
+</script>
+
+</body>
+</html>

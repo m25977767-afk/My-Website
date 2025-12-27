@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #14002a, #3a0066, #6a1b9a, #c77dff);
+  background-size: 400% 400%;
+  animation: gradientMove 12s ease infinite;
+  color: #fff;
+  overflow-x: hidden;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== CARD ===== */
+.card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 25px;
+  padding: 50px 40px;
+  max-width: 600px;
+  text-align: left;
+  box-shadow: 0 0 40px rgba(180,110,255,0.4);
+  animation: fadeIn 1.2s ease forwards;
+  position: relative;
+  overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+  font-size: clamp(32px, 5vw, 45px);
+  margin-bottom: 20px;
+  background: linear-gradient(90deg, #e0b3ff, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(220,170,255,0.7);
+  text-align: center;
+}
+
+p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  opacity: 0.9;
+  line-height: 1.7;
+}
+
+/* ===== SOCIAL LINKS ===== */
+.social-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 10px 0;
+  position: relative;
+}
+
+.social-link img {
+  width: 22px;
+  height: 22px;
+  animation: glowPulse 2s infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 0px #fff); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 8px #fff); transform: scale(1.1); }
+}
+
+.social-link a {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.3s;
+}
+
+.social-link a:hover {
+  color: #c77dff;
+  text-shadow: 0 0 10px rgba(200,140,255,0.7);
+}
+
+/* ===== BACK BUTTON ===== */
+a.back-btn {
+  display: block;
+  padding: 12px 28px;
+  border-radius: 30px;
+  background: linear-gradient(90deg, #a855f7, #7e22ce);
+  color: #fff;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 0 25px rgba(168, 85, 247, 0.7);
+  transition: 0.3s ease;
+  margin: 30px auto 0 auto; /* centers the button */
+  text-align: center;
+}
+a.back-btn:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 40px rgba(168, 85, 247, 0.9);
+}
+
+/* ===== SPRITES ===== */
+.sprite {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: white;
+  opacity: 0.8;
+  pointer-events: none;
+  box-shadow: 0 0 8px 3px rgba(255,255,255,0.8);
+  animation: float 1.5s ease-out forwards;
+}
+
+@keyframes float {
+  0% { transform: scale(0.5) translateY(0); opacity: 1; }
+  100% { transform: scale(1.5) translateY(-50px); opacity: 0; }
+}
+</style>
+</head>
+<body>
+
+<div class="card">
+  <h1>Contact BSIS 1E</h1>
+  <p>
+    Feel free to reach out to us through our official class emails or social media platforms. 
+    We are always happy to hear from classmates, alumni, or anyone interested in our projects and activities. 
+    Stay connected with us and be part of the vibrant BSIS E2025 community!
+  </p>
+
+  <div class="social-link">
+    <img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="Facebook">
+    <b>Facebook:</b> <a href="https://www.facebook.com/profile.php?id=61579064955231" target="_blank">BSIS E2025</a>
+  </div>
+
+  <div class="social-link">
+    <img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram">
+    <b>Instagram:</b> <a href="https://www.instagram.com/bsis_e2025_freedomwall/" target="_blank">bsis_e2025_freedomwall</a>
+  </div>
+
+  <div class="social-link">
+    <img src="https://cdn-icons-png.flaticon.com/512/724/724664.png" alt="Phone">
+    <b>Phone:</b> <a href="tel:+1234567890">+1 234 567 890</a>
+  </div>
+
+  <div class="social-link">
+    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email">
+    <b>Email:</b> <a href="mailto:bsis.e2025@gmail.com">bsis.e2025@gmail.com</a>
+  </div>
+
+  <a href="HOME2.html" class="back-btn">↩ Back to Home</a>
+</div>
+
+<script>
+// Floating sprite effect
+document.addEventListener('mousemove', function(e){
+  const sprite = document.createElement('div');
+  sprite.className = 'sprite';
+  sprite.style.left = e.pageX + 'px';
+  sprite.style.top = e.pageY + 'px';
+  document.body.appendChild(sprite);
+  setTimeout(() => sprite.remove(), 1500);
+});
+</script>
+
+</body>
+</html>

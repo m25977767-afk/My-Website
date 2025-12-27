@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Class Schedule</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  background: linear-gradient(135deg, #1a001f, #3a0a3d, #8b1e3f, #c77dff);
+  background-size: 400% 400%;
+  animation: gradientMove 14s ease infinite;
+  color: #fff;
+  min-height: 100vh;
+  position: relative;
+}
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ===== TOP NAV ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 30px;
+  background: rgba(20, 0, 40, 0.7);
+  backdrop-filter: blur(18px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(140, 80, 255, 0.4);
+}
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: #f4dfff;
+  margin-left: 70px;
+}
+.navbar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.nav-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #e9d8ff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+.nav-links a:hover {
+  background: linear-gradient(90deg, #a855f7, #7e22ce);
+  box-shadow: 0 0 15px rgba(168,85,247,0.8);
+  color: #fff;
+}
+.nav-links a.active {
+  background: linear-gradient(90deg, #c77dff, #a855f7);
+  box-shadow: 0 0 18px rgba(200,140,255,0.9);
+  color: #fff;
+}
+
+/* ===== HAMBURGER MENU ===== */
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger div {
+  width: 28px;
+  height: 3px;
+  background: #fff;
+  border-radius: 3px;
+  transition: 0.3s ease;
+}
+
+/* ===== SIDE NAV ===== */
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100%;
+  width: 250px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 0 40px rgba(180, 110, 255, 0.4);
+  transition: 0.4s ease;
+  z-index: 1000;
+}
+.side-nav a {
+  text-decoration: none;
+  color: #f4dfff;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+.side-nav a:hover {
+  background: linear-gradient(90deg, #c77dff, #a855f7);
+  box-shadow: 0 0 20px rgba(200, 140, 255, 0.9);
+}
+.close-btn {
+  align-self: flex-end;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #fff;
+}
+.side-nav.open { left: 0; }
+
+/* ===== DASHBOARD ===== */
+.dashboard {
+  max-width: 1300px;
+  margin: 80px auto;
+  padding: 70px 25px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(20px);
+  border-radius: 30px;
+  box-shadow: 0 0 40px rgba(180, 110, 255, 0.4);
+  text-align: center;
+}
+.dashboard h1 {
+  font-size: clamp(32px, 5vw, 45px);
+  background: linear-gradient(90deg, #e0b3ff, #fff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 25px rgba(220, 170, 255, 0.8);
+  margin-bottom: 40px;
+}
+
+/* ===== NAVBAR ANIMATION ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 30px;
+  background: rgba(20, 0, 40, 0.7);
+  backdrop-filter: blur(18px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(140, 80, 255, 0.4);
+  animation: navbarGlow 3s ease-in-out infinite;
+}
+
+/* Glow pulse effect */
+@keyframes navbarGlow {
+  0%, 100% { box-shadow: 0 10px 30px rgba(140, 80, 255, 0.4); }
+  50% { box-shadow: 0 10px 40px rgba(200, 120, 255, 0.7); }
+}
+
+/* Brand slide-in */
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: #f4dfff;
+  margin-left: 70px;
+  animation: brandSlide 1s ease forwards;
+}
+@keyframes brandSlide {
+  0% { transform: translateX(-100px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Links fade-in */
+.nav-links a {
+  text-decoration: none;
+  color: #e9d8ff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+  font-weight: 500;
+  opacity: 0;
+  animation: linkFadeIn 1s forwards;
+}
+.nav-links a:nth-child(1) { animation-delay: 0.3s; }
+.nav-links a:nth-child(2) { animation-delay: 0.45s; }
+.nav-links a:nth-child(3) { animation-delay: 0.6s; }
+.nav-links a:nth-child(4) { animation-delay: 0.75s; }
+.nav-links a:nth-child(5) { animation-delay: 0.9s; }
+.nav-links a:nth-child(6) { animation-delay: 1.05s; }
+.nav-links a:nth-child(7) { animation-delay: 1.2s; }
+.nav-links a:nth-child(8) { animation-delay: 1.35s; }
+.nav-links a:nth-child(9) { animation-delay: 1.5s; }
+.nav-links a:nth-child(10) { animation-delay: 1.65s; }
+.nav-links a:nth-child(11) { animation-delay: 1.8s; }
+
+@keyframes linkFadeIn {
+  0% { opacity: 0; transform: translateY(-15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ===== SCHEDULE TABLE ===== */
+table {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-collapse: collapse;
+  background: rgba(255,255,255,0.08);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 0 30px rgba(176,100,255,0.25);
+}
+th, td {
+  padding: 12px 10px;
+  text-align: center;
+  color: #f3e5ff;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+th {
+  background: rgba(255,255,255,0.1);
+  font-weight: 700;
+  text-shadow: 0 0 6px #d8b3ff;
+}
+tr:hover td {
+  background: rgba(255,255,255,0.06);
+  transition: 0.2s;
+}
+
+/* Highlight current day */
+.today {
+  background: linear-gradient(90deg, #a855f7, #7e22ce);
+  color: #fff;
+  font-weight: 700;
+  transition: 0.3s ease;
+}
+
+/* Special glow for "No Classes" */
+.no-classes {
+  box-shadow: 0 0 15px rgba(168,85,247,0.8);
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align:center;
+  padding:25px;
+  font-size:14px;
+  background: rgba(30,0,60,0.8);
+  box-shadow:0 -5px 15px rgba(200,140,255,0.5);
+  border-radius:20px;
+  margin-top:40px;
+}
+
+/* ===== SPARKLE ===== */
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  pointer-events: none;
+  opacity: 0.8;
+  box-shadow: 0 0 8px 3px rgba(255,255,255,0.8);
+  animation: sparkleAnim 0.8s ease-out forwards;
+}
+@keyframes sparkleAnim {
+  0% { transform: scale(0.5); opacity:1; }
+  100% { transform: scale(1.5); opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<!-- HAMBURGER -->
+<div class="hamburger" id="hamburger">
+  <div></div><div></div><div></div>
+</div>
+
+<!-- SIDE NAV -->
+<nav class="side-nav" id="sideNav">
+  <span class="close-btn" id="closeNav">&times;</span>
+  <a href="about.html">About Us</a>
+  <a href="story.html">Our Story</a>
+  <a href="contact.html">Contact Us</a>
+</nav>
+
+<!-- TOP NAV -->
+<div class="navbar">
+  <div class="brand">
+    <img src="C:\Users\Jenell\Downloads\rrrrrr.jpg" alt="BSIS">
+    BSIS E
+  </div>
+  <div class="nav-links">
+    <a href="HOME2.html">Home</a>
+    <a href="OFFICERS.html">Officers</a>
+    <a href="MASTERLIST.html">Masterlist</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="BDAY.html">Birthdays</a>
+    <a href="EVENTS.html">Events</a>
+    <a href="TODO.html">To Do's</a>
+    <a href="FEEDBACKS.html">Comments</a>
+    <a href="SCHED.html">Schedule</a>
+    <a href="PROF.html">Professors</a>
+    <a href="MEMORIES.html">Moments</a>
+  </div>
+</div>
+
+<section class="dashboard">
+  <h1>BSIS 1E Class Schedule</h1>
+
+  <table id="scheduleTable">
+    <thead>
+      <tr>
+        <th>Sunday</th>
+        <th>Monday</th>
+        <th>Tuesday</th>
+        <th>Wednesday</th>
+        <th>Thursday</th>
+        <th>Friday</th>
+        <th>Saturday</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>6:30AM - 12:00NN<br>NSTP (ROTC)</td>
+        <td>3:00PM - 6:00PM<br>Fundamentals of IS</td>
+        <td>1:00PM - 3:00PM<br>JAVA</td>
+        <td>2:30PM - 5:00PM<br>Mathematics in the Modern World</td>
+        <td rowspan="3">No Classes</td>
+        <td>1:00PM - 3:00PM<br>P.E.</td>
+        <td>7:30AM - 10:30AM<br>Intro to Computing</td>
+      </tr>
+      <tr>
+        <td>-</td>
+        <td>6:00PM - 9:00PM<br>Professional in IS</td>
+        <td>3:00PM - 5:30PM<br>Comp-Lab</td>
+        <td>6:00PM - 9:00PM<br>Panitikang Pilipino</td>
+        <td>3:00PM - 5:30PM<br>Fundamentals of IS</td>
+        <td>2:00PM - 5:00PM<br>Contemporary World</td>
+      </tr>
+      <tr>
+        <td>-</td>
+        <td>-</td>
+        <td>-</td>
+        <td>6:00PM - 9:00PM<br>NSTP (CWTS/LTS)</td>
+        <td>-</td>
+        <td>-</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<footer>
+  © 2025 Bachelor of Science in Information System | Designed by Group 2
+</footer>
+
+<script>
+// Hamburger functionality
+const hamburger = document.getElementById("hamburger");
+const sideNav = document.getElementById("sideNav");
+const closeNav = document.getElementById("closeNav");
+hamburger.addEventListener("click", () => sideNav.classList.add("open"));
+closeNav.addEventListener("click", () => sideNav.classList.remove("open"));
+document.addEventListener("click", (e) => {
+  if(!sideNav.contains(e.target) && !hamburger.contains(e.target)){
+    sideNav.classList.remove("open");
+  }
+});
+
+// Mouse sparkle effect
+document.addEventListener('mousemove', function(e){
+  const sparkle = document.createElement('div');
+  sparkle.className = 'sparkle';
+  sparkle.style.left = e.pageX + 'px';
+  sparkle.style.top = e.pageY + 'px';
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 800);
+});
+
+const table = document.getElementById("scheduleTable");
+const today = new Date().getDay(); // Sunday=0 ... Saturday=6
+
+const rowSpanMap = []; // Tracks cells with rowspan > 1
+
+Array.from(table.tBodies[0].rows).forEach((row, rowIndex) => {
+    let colIndex = 0;
+
+    Array.from(row.cells).forEach(cell => {
+        // Skip columns occupied by previous row's rowspan
+        while (rowSpanMap[colIndex] > 0) {
+            rowSpanMap[colIndex]--;
+            colIndex++;
+        }
+
+        // Check if this is the column for today
+        if (colIndex === today) {
+            cell.classList.add("today");
+            if (cell.textContent.trim().toLowerCase() === "no classes") {
+                cell.classList.add("no-classes");
+            }
+        }
+
+        // Record rowspan if any
+        const rs = cell.rowSpan || 1;
+        if (rs > 1) {
+            rowSpanMap[colIndex] = rs - 1;
+        }
+
+        colIndex += cell.colSpan || 1;
+    });
+});
+
+const navLinks = document.querySelectorAll(".nav-links a");
+const currentPage = window.location.pathname.split("/").pop();
+
+navLinks.forEach(link => {
+  const linkPage = link.getAttribute("href");
+  if (linkPage === currentPage) {
+    link.classList.add("active");
+  }
+});
+
+</script>
+
+</body>
+</html>

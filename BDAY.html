@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Birthday Calendar</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===== BASE ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+body {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a001f, #3a0a3d, #8b1e3f, #c77dff);
+  background-size: 400% 400%;
+  animation: gradientFade 14s ease-in-out infinite;
+  color: #fff;
+  overflow-x: hidden;
+}
+@keyframes gradientFade {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+/* ===== TOP NAV ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 30px;
+  background: rgba(20, 0, 40, 0.7);
+  backdrop-filter: blur(18px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(140, 80, 255, 0.4);
+}
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: #f4dfff;
+  margin-left: 70px;
+}
+.navbar img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+.nav-links {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.nav-links a {
+  text-decoration: none;
+  color: #e9d8ff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+  font-weight: 500;
+}
+.nav-links a:hover {
+  background: linear-gradient(90deg, #a855f7, #7e22ce);
+  box-shadow: 0 0 15px rgba(168,85,247,0.8);
+  color: #fff;
+}
+.nav-links a.active {
+  background: linear-gradient(90deg, #c77dff, #a855f7);
+  box-shadow: 0 0 18px rgba(200,140,255,0.9);
+  color: #fff;
+}
+
+/* ===== HAMBURGER MENU ===== */
+.hamburger {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+  z-index: 1001;
+}
+.hamburger div {
+  width: 28px;
+  height: 3px;
+  background: #fff;
+  border-radius: 3px;
+  transition: 0.3s ease;
+}
+/* ===== SIDE NAV ===== */
+.side-nav {
+  position: fixed;
+  top: 0;
+  left: -250px;
+  height: 100%;
+  width: 250px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(18px);
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: 0 0 40px rgba(180, 110, 255, 0.4);
+  transition: 0.4s ease;
+  z-index: 1000;
+}
+.side-nav a {
+  text-decoration: none;
+  color: #f4dfff;
+  font-weight: 600;
+  padding: 10px 15px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+}
+.side-nav a:hover {
+  background: linear-gradient(90deg, #c77dff, #a855f7);
+  box-shadow: 0 0 20px rgba(200, 140, 255, 0.9);
+}
+.close-btn {
+  align-self: flex-end;
+  font-size: 2rem;
+  cursor: pointer;
+  color: #fff;
+}
+.side-nav.open { left: 0; }
+
+/* ===== DASHBOARD / CALENDAR ===== */
+.dashboard {
+  max-width:1300px;
+  margin:50px auto;
+  padding:40px;
+  background:rgba(255,255,255,0.08);
+  backdrop-filter:blur(20px);
+  border-radius:30px;
+  box-shadow:0 0 40px rgba(180,110,255,0.4);
+  text-align:center;
+}
+.dashboard h1 {
+  font-size: clamp(28px,5vw,40px);
+  margin-bottom:30px;
+  background: linear-gradient(90deg,#e0b3ff,#fff);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  text-shadow:0 0 25px rgba(220,170,255,0.8);
+}
+/* ===== NAVBAR ANIMATION ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  padding: 15px 30px;
+  background: rgba(20, 0, 40, 0.7);
+  backdrop-filter: blur(18px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 10px 30px rgba(140, 80, 255, 0.4);
+  animation: navbarGlow 3s ease-in-out infinite;
+}
+
+/* Glow pulse effect */
+@keyframes navbarGlow {
+  0%, 100% { box-shadow: 0 10px 30px rgba(140, 80, 255, 0.4); }
+  50% { box-shadow: 0 10px 40px rgba(200, 120, 255, 0.7); }
+}
+
+/* Brand slide-in */
+.navbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: #f4dfff;
+  margin-left: 70px;
+  animation: brandSlide 1s ease forwards;
+}
+@keyframes brandSlide {
+  0% { transform: translateX(-100px); opacity: 0; }
+  100% { transform: translateX(0); opacity: 1; }
+}
+
+/* Links fade-in */
+.nav-links a {
+  text-decoration: none;
+  color: #e9d8ff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  transition: 0.3s ease;
+  font-weight: 500;
+  opacity: 0;
+  animation: linkFadeIn 1s forwards;
+}
+.nav-links a:nth-child(1) { animation-delay: 0.3s; }
+.nav-links a:nth-child(2) { animation-delay: 0.45s; }
+.nav-links a:nth-child(3) { animation-delay: 0.6s; }
+.nav-links a:nth-child(4) { animation-delay: 0.75s; }
+.nav-links a:nth-child(5) { animation-delay: 0.9s; }
+.nav-links a:nth-child(6) { animation-delay: 1.05s; }
+.nav-links a:nth-child(7) { animation-delay: 1.2s; }
+.nav-links a:nth-child(8) { animation-delay: 1.35s; }
+.nav-links a:nth-child(9) { animation-delay: 1.5s; }
+.nav-links a:nth-child(10) { animation-delay: 1.65s; }
+.nav-links a:nth-child(11) { animation-delay: 1.8s; }
+
+@keyframes linkFadeIn {
+  0% { opacity: 0; transform: translateY(-15px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+
+/* ===== CALENDAR ===== */
+.calendar {
+  width: 100%;
+  max-width: 900px;
+  margin:0 auto;
+}
+.calendar-header {
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom:20px;
+}
+.calendar-header h2 { font-size:1.8rem; }
+.calendar-header button {
+  background:linear-gradient(90deg,#c77dff,#a855f7);
+  border:none;
+  padding:10px 20px;
+  border-radius:10px;
+  color:#fff;
+  cursor:pointer;
+  font-weight:600;
+  transition:0.3s;
+}
+.calendar-header button:hover {
+  background:linear-gradient(90deg,#e0b3ff,#b47bff);
+}
+
+/* Weekdays */
+.weekdays {
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align:center;
+  font-weight:700;
+  margin-bottom:10px;
+}
+.weekdays div { padding:10px 0; }
+
+/* Days */
+.days {
+  display:grid;
+  grid-template-columns: repeat(7,1fr);
+}
+.day {
+  padding:15px;
+  margin:2px;
+  border-radius:10px;
+  background:rgba(255,255,255,0.07);
+  transition:0.3s;
+  cursor:pointer;
+  position:relative;
+}
+.day:hover { transform:scale(1.05); box-shadow:0 0 15px rgba(255,255,255,0.3); }
+.day.today { background:rgba(255,255,255,0.4); color:#2e0846; font-weight:700; animation:glow 1.5s infinite alternate; }
+.day.birthday { border:2px solid #ffdd57; }
+.day .tooltip {
+  position:absolute;
+  top:-25px;
+  left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.7);
+  padding:5px 10px;
+  border-radius:5px;
+  font-size:12px;
+  display:none;
+}
+.day:hover .tooltip { display:block; }
+
+@keyframes glow { from{box-shadow:0 0 5px #fff;} to{box-shadow:0 0 25px #fff;} }
+.sparkle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: white;
+  pointer-events: none;
+  opacity: 0.8;
+  box-shadow: 0 0 8px 3px rgba(255,255,255,0.8);
+  animation: sparkleAnim 0.8s ease-out forwards;
+}
+@keyframes sparkleAnim {
+  0% { transform: scale(0.5); opacity: 1; }
+  100% { transform: scale(1.5); opacity: 0; }
+}
+
+
+/* ===== FOOTER ===== */
+footer {
+    text-align:center;
+    padding:25px;
+    font-size:14px;
+    background: rgba(30,0,60,0.8);
+    box-shadow:0 -5px 15px rgba(200,140,255,0.5);
+    border-radius:20px;
+}
+</style>
+</head>
+
+<body>
+<!-- Hamburger -->
+<div class="hamburger" id="hamburger"><div></div><div></div><div></div></div>
+
+<!-- Side Nav -->
+<nav class="side-nav" id="sideNav">
+    <span class="close-btn" id="closeNav">&times;</span>
+    <a href="about.html">About Us</a>
+    <a href="story.html">Our Story</a>
+    <a href="contact.html">Contact Us</a>
+</nav>
+
+<!-- NAVBAR -->
+<div class="navbar">
+  <div class="brand"><img src="C:\Users\Jenell\Downloads\rrrrrr.jpg" alt="BSIS">BSIS E</div>
+  <div class="nav-links">
+    <a href="HOME2.html">Home</a>
+    <a href="OFFICERS.html">Officers</a>
+    <a href="MASTERLIST.html">Masterlist</a>
+    <a href="achievements.html">Achievements</a>
+    <a href="BDAY.html">Birthdays</a>
+    <a href="EVENTS.html">Events</a>
+    <a href="TODO.html">To Do's</a>
+    <a href="FEEDBACKS.html">Comments</a>
+    <a href="SCHED.html">Schedule</a>
+    <a href="PROF.html">Professors</a>
+    <a href="MEMORIES.html">Moments</a>
+  </div>
+</div>
+
+<div class="dashboard">
+  <h1>🎂 BSIS 1E Birthday Calendar 🎉</h1>
+  <div class="calendar">
+    <div class="calendar-header">
+      <button id="prevMonth">&lt;</button>
+      <h2 id="monthYear"></h2>
+      <button id="nextMonth">&gt;</button>
+    </div>
+    <div class="weekdays">
+      <div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div><div>Sun</div>
+    </div>
+    <div class="days" id="days"></div>
+  </div>
+</div>
+
+<!-- POPUP -->
+<div class="popup" id="popup" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background:rgba(255,255,255,0.12); padding:40px 50px; border-radius:20px; text-align:center; color:#fff; z-index:1001;">
+  <h2>🎉 Happy Birthday! 🎂</h2>
+  <p id="popupText"></p>
+  <button onclick="closePopup()" style="margin-top:15px; padding:10px 20px; border-radius:10px; border:none; background:linear-gradient(90deg,#c77dff,#9c4dcc); color:#fff; cursor:pointer;">Close</button>
+</div>
+
+<footer>
+  © 2025 Bachelor of Science in Information System | Designed by Group 2
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<script>
+// Hamburger menu
+const hamburger = document.getElementById("hamburger");
+const sideNav = document.getElementById("sideNav");
+const closeNav = document.getElementById("closeNav");
+hamburger.addEventListener("click",()=>sideNav.classList.add("open"));
+closeNav.addEventListener("click",()=>sideNav.classList.remove("open"));
+document.addEventListener("click",(e)=>{if(!sideNav.contains(e.target)&&!hamburger.contains(e.target)) sideNav.classList.remove("open");});
+
+// Mouse sparkle effect
+document.addEventListener('mousemove', function(e){
+  const sparkle = document.createElement('div');
+  sparkle.className = 'sparkle';
+  sparkle.style.left = e.pageX + 'px';
+  sparkle.style.top = e.pageY + 'px';
+  document.body.appendChild(sparkle);
+  setTimeout(() => sparkle.remove(), 800);
+});
+
+const birthdays = [
+  { name:"James Norbert Evangelio", date:"2007-12-13" },
+  { name:"Kryle Jc T. Tanael", date:"2005-11-04" },
+  { name:"Vin M. Mangubat", date:"2007-02-13" },
+  { name:"Gian Carlo A. Bautista", date:"2007-08-19" },
+  { name:"Yellena Sueiene P. Paiton", date:"2007-05-30" },
+  { name:"Luigi V. Escano", date:"2007-08-18" },
+  { name:"Gabriel B. Detarro", date:"2006-05-25" },
+  { name:"Isaiah Raul D. Andanar", date:"2007-03-28" },
+  { name:"John Stephen S. Suyao", date:"2007-07-27" },
+  { name:"Bernard Sibug Jr", date:"2007-05-28" },
+  { name:"Jullian A. Rosillo", date:"2006-09-23" },
+  { name:"Lian Mae L. Uybungco", date:"2007-09-28" },
+  { name:"Kimrose Claire R. Arroyo", date:"2006-11-22" },
+  { name:"Daniella Antonnette", date:"2007-01-14" },
+  { name:"Jhon Daniel A. Lucente", date:"2007-07-31" },
+  { name:"Jenell L. Pagtakhan", date:"2007-06-21" },
+  { name:"Elaiza Kim F. Estayan", date:"2007-08-22" },
+  { name:"Gian Raven De Guzman", date:"2007-08-25" },
+  { name:"Lian Andrea E. Sulit", date:"2007-06-25" },
+  { name:"Arveen P. Cuarto", date:"2007-08-29" },
+  { name:"Jollemar Q. Bisuyan", date:"2007-05-27" },
+  { name:"Mark Joseph A. Espina", date:"2007-10-20" },
+  { name:"Chade Lawrence J. Dela Cruz", date:"2007-01-04" },
+  { name:"Ris An Pascual", date:"2007-08-19" },
+  { name:"John Argo B. Gavine", date:"2006-10-06" },
+  { name:"Ian Jeferson S. Datangel", date:"2006-02-29" },
+  { name:"John Alfred C. Plaza", date:"2007-07-06" },
+  { name:"Rafael Carlos L. Victoria", date:"2007-01-01" },
+  { name:"Aileen M. Resus", date:"2007-08-18" },  
+];
+
+const daysContainer = document.getElementById('days');
+const monthYear = document.getElementById('monthYear');
+const popup = document.getElementById('popup');
+const popupText = document.getElementById('popupText');
+
+let currentDate = new Date();
+
+function renderCalendar(date) {
+  daysContainer.innerHTML = '';
+  const year = date.getFullYear();
+  const month = date.getMonth();
+
+  const firstDay = new Date(year, month, 1);
+  const lastDay = new Date(year, month + 1, 0);
+
+  monthYear.textContent = firstDay.toLocaleString('default',{month:'long', year:'numeric'});
+
+  // Find day index for Monday start
+  let startDay = firstDay.getDay() === 0 ? 6 : firstDay.getDay() - 1;
+
+  for (let i=0; i<startDay; i++) { 
+    const empty = document.createElement('div');
+    daysContainer.appendChild(empty);
+  }
+
+  for (let d=1; d<=lastDay.getDate(); d++) {
+    const dayDiv = document.createElement('div');
+    dayDiv.classList.add('day');
+    const fullDate = new Date(year, month, d);
+    dayDiv.textContent = d;
+
+    // Highlight today
+    const today = new Date();
+    if(today.getFullYear()===year && today.getMonth()===month && today.getDate()===d){
+      dayDiv.classList.add('today');
+    }
+
+    // Check birthdays
+    const dayBirthdays = birthdays.filter(b => {
+      const bDate = new Date(b.date);
+      return bDate.getDate()===d && bDate.getMonth()===month;
+    });
+
+    if(dayBirthdays.length){
+      dayDiv.classList.add('birthday');
+      const tooltip = document.createElement('div');
+      tooltip.classList.add('tooltip');
+      tooltip.textContent = dayBirthdays.map(b=>{
+        const age = year - new Date(b.date).getFullYear();
+        return `${b.name} (${age})`;
+      }).join(', ');
+      dayDiv.appendChild(tooltip);
+
+      // If today is birthday, popup
+      const today = new Date();
+      dayBirthdays.forEach(b=>{
+        const bDate = new Date(b.date);
+        if(bDate.getDate()===today.getDate() && bDate.getMonth()===today.getMonth()){
+          popupText.textContent = dayBirthdays.map(bb=>{
+            const age = year - new Date(bb.date).getFullYear();
+            return `${bb.name} (${age})`;
+          }).join(', ');
+          popup.style.display='block';
+          launchConfetti();
+        }
+      });
+    }
+
+    daysContainer.appendChild(dayDiv);
+  }
+}
+
+// Navigation
+document.getElementById('prevMonth').addEventListener('click', ()=>{
+  currentDate.setMonth(currentDate.getMonth()-1);
+  renderCalendar(currentDate);
+});
+document.getElementById('nextMonth').addEventListener('click', ()=>{
+  currentDate.setMonth(currentDate.getMonth()+1);
+  renderCalendar(currentDate);
+});
+
+function closePopup(){ popup.style.display='none'; }
+
+// Confetti
+function launchConfetti(){
+  const duration = 3*1000;
+  const end = Date.now() + duration;
+  (function frame(){
+    confetti({
+      particleCount:3,
+      angle:60,
+      spread:55,
+      origin:{x:0},
+      colors:['#bb86fc','#ffffff']
+    });
+    confetti({
+      particleCount:3,
+      angle:120,
+      spread:55,
+      origin:{x:1},
+      colors:['#bb86fc','#ffffff']
+    });
+    if(Date.now()<end) requestAnimationFrame(frame);
+  })();
+}
+
+// Initial render
+renderCalendar(currentDate);
+const navLinks = document.querySelectorAll(".nav-links a");
+const currentPage = window.location.pathname.split("/").pop();
+
+navLinks.forEach(link => {
+  const linkPage = link.getAttribute("href");
+  if (linkPage === currentPage) {
+    link.classList.add("active");
+  }
+});
+
+</script>
+</body>
+</html>
